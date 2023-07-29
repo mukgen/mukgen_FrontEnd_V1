@@ -47,7 +47,7 @@ function Login() {
     if (cookies.accessToken && cookies.refreshToken) {
       navigate("/");
     }
-  }, []);
+  }, [cookies.accessToken, cookies.refreshToken, navigate]);
 
   return (
     <Main>
