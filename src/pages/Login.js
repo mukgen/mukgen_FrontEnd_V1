@@ -24,7 +24,7 @@ function Login() {
     if (!(Id && Password)) return;
     axios({
       method: "POST",
-      url: "http://cors-anywhere.herokuapp.com/https://www.mukgen.info/auth/login/chef",
+      url: "https://www.mukgen.info/auth/login/chef",
       data: {
         accountId: Id,
         password: Password,
