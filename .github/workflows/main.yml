@@ -23,9 +23,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: React Build
+      - name: Npm Install
         run: |
           npm install
+
+      - name: Npm Build
+        run: |
           npm run build
 
       - name: Upload on S3
