@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Pretendard;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f5f6f6;
+}
+
+body::-webkit-scrollbar {
+  width: 20px;
+  padding: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #FE984D;
+  border-radius: 10px;
+  border: 6px solid #fff;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #FF7A1B;
+}
+
+body::-webkit-scrollbar-thumb:active {
+  background-color: #FF7A1B;
+}
+
+body::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+/* body::-webkit-scrollbar-button:vertical:start:decrement {
+  display: block;
+  height: 4px;
+}
+
+body::-webkit-scrollbar-button:vertical:start:increment {
+  display: block;
+  height: 4px;
+} */
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
