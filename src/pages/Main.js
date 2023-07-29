@@ -16,7 +16,7 @@ function Main() {
   const GetData = () => {
     axios({
       method: "POST",
-      url: "http://cors-anywhere.herokuapp.com/https://www.mukgen.info/review/all",
+      url: "https://www.mukgen.info/review/all",
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
       },
