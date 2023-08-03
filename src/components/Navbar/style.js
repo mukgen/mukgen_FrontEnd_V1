@@ -1,23 +1,6 @@
-import React from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
-import Logo from "../Icon/Logo";
 
-function Navbar() {
-  const navigate = useNavigate();
-  return (
-    <Header>
-      <Logo subTitle />
-      <HeaderLogout onClick={() => navigate("/auth/login")}>
-        로그인
-      </HeaderLogout>
-    </Header>
-  );
-}
-
-export default Navbar;
-
-const Header = styled.div`
+export const Header = styled.div`
   top: 0;
   z-index: 999;
   position: sticky;
@@ -32,7 +15,7 @@ const Header = styled.div`
   box-sizing: border-box;
 `;
 
-const HeaderLogout = styled.div`
+export const HeaderLogout = styled.div`
   display: flex;
   padding: 10px 20px;
   align-items: center;

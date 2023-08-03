@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import * as _ from "./style";
-import { type } from "@testing-library/user-event/dist/type";
 
-function Input({ title, placeholder, viewpwd, value, setState, NoSameText }) {
+function Input({ title, placeholder, viewpwd, value, setValue, NoSameText }) {  // 이름은 직관적인 것이 좋을 것 같아 바꿈
   const [view, setView] = useState(viewpwd ?? false);
   const [isFocused, setIsFocused] = useState(false);
-  const handleFocus = () => {
+
+  const handleFocus = () => { // 이렇게 위아래 간격을 두는 편이 보기 더 좋음
     setIsFocused(true);
   };
+
   const handleBlur = () => {
     setIsFocused(false);
   };
+
   const handleChange = (e) => {
-    setState(e.target.value);
+    setValue(e.target.value);
   };
+
   const getBorderColor = () => {
     if (value !== "") {
       return isFocused ? "#FE6B01" : "#494A4F";
@@ -21,6 +24,7 @@ function Input({ title, placeholder, viewpwd, value, setState, NoSameText }) {
       return isFocused ? "#FE6B01" : "#C9CAD0";
     }
   };
+
   return (
     <_.InputBox>
       <_.InputTitle>{title}</_.InputTitle>

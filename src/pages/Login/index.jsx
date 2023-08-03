@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Input from "../components/Input/Input";
-import Logo from "../Icon/Logo";
-import SignButton from "../components/Button/SignButton";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
+import axios from "axios";
+import SignButton from "../../components/Button/SignButton";
+import Input from "../../components/Input";
+import Logo from "../../Icon/Logo";
+import * as _ from "./style"; // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
 
 function Login() {
   const navigate = useNavigate();
-  const [cookies, setCookies] = useCookies([]);
+  const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken']);  // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const [Id, setId] = useState("");
   const [Password, setPassword] = useState("");
   let notNullColor = "#C9CAD0";
@@ -50,28 +50,28 @@ function Login() {
   }, [cookies.accessToken, cookies.refreshToken, navigate]);
 
   return (
-    <Main>
-      <LoginBox>
-        <LoginHeader>
+    <_.Main>
+      <_.LoginBox>
+        <_.LoginHeader>
           <Logo />
-          <HeaderTitle>로그인</HeaderTitle>
-        </LoginHeader>
-        <LoginMain>
-          <InputBox>
+          <_.HeaderTitle>로그인</_.HeaderTitle>
+        </_.LoginHeader>
+        <_.LoginMain>
+          <_.InputBox>
             <Input
               title={"아이디"}
               placeholder={"아이디"}
               value={Id}
-              setState={setId}
+              setValue={setId}
             />
             <Input
               title={"비밀번호"}
               placeholder={"비밀번호"}
               value={Password}
-              setState={setPassword}
+              setValue={setPassword}
               viewpwd
             />
-          </InputBox>
+          </_.InputBox>
           <SignButton
             buttontext={"로그인"}
             introtext={"회원이 아니신가요?"}
@@ -80,63 +80,12 @@ function Login() {
             buttonPointer={`${buttonCursor}`}
             postLogin={PostLogin}
           />
-        </LoginMain>
-      </LoginBox>
-    </Main>
+        </_.LoginMain>
+      </_.LoginBox>
+    </_.Main>
   );
 }
 
 export default Login;
 
-const Main = styled.div`
-  display: flex;
-  padding: 40px 0;
-  justify-content: center;
-  align-items: flex-start;
-  height: calc(100vh - 168px);
-`;
 
-const LoginBox = styled.div`
-  box-sizing: border-box;
-  display: flex;
-  width: 600px;
-  height: 700px;
-  padding: 40px 100px;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 20px;
-  background: #fff;
-`;
-
-const LoginHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-`;
-
-const HeaderTitle = styled.p`
-  color: #333438;
-  font-size: 40px;
-  font-weight: 600;
-  margin: 0;
-`;
-
-const LoginMain = styled.div`
-  padding: 30px 0 20px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-`;
-
-const InputBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 40px;
-  width: 100%;
-`;

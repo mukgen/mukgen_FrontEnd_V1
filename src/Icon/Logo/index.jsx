@@ -1,10 +1,10 @@
 import React from "react";
-import styled from "styled-components";
+import * as _ from "./style"; // 코드 분리
 
 const Logo = ({ subTitle }) => {
   return (
-    <HeaderLogo>
-      <HeaderIcon>
+    <_.LogoCover>
+      <_.LogoIcon>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="40"
@@ -35,42 +35,11 @@ const Logo = ({ subTitle }) => {
             fill="#6B6C71"
           />
         </svg>
-      </HeaderIcon>
-      <HeaderTitle>MUKGEN</HeaderTitle>
-      {subTitle && <HeaderSubTitle>영양사 선생님</HeaderSubTitle>}
-    </HeaderLogo>
+      </_.LogoIcon>
+      <_.LogoTitle>MUKGEN</_.LogoTitle>
+      {subTitle && <_.LogoSubTitle>영양사 선생님</_.LogoSubTitle>}
+    </_.LogoCover>
   );
 };
 
 export default Logo;
-
-const HeaderLogo = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
-
-const HeaderIcon = styled.div`
-  width: 40px;
-  height: 40px;
-`;
-
-const HeaderTitle = styled.p`
-  color: #85858d;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  margin: 0;
-`;
-
-const HeaderSubTitle = styled.p`
-  color: #ff7a1b;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  padding: 8px 0 0 10px;
-  margin: 0;
-`;
