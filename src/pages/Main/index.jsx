@@ -3,10 +3,10 @@ import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import MealSuggestion from "../../components/MealSuggestion";
-import MealReview from "../../components/MealMenu";
-import MealGraph from "../../components/Graph/MealGraph";
-import MealGrade from "../../components/Graph/MealGrade";
+import MealSuggestion from "../../components/MealSuggestion/index";
+import MealReview from "../../components/MealMenu/index";
+import MealGraph from "../../components/Graph/MealGraph/index";
+import MealGrade from "../../components/Graph/MealGrade/index";
 import * as _ from "./style";  // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
 
 function Main() {

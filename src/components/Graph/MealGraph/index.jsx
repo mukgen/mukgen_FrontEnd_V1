@@ -60,7 +60,7 @@ function MealGraph() {
           {Texts(secondData)}
         </svg>
       </GraphBox>
-      <MealGraphDate data={secondData} />
+      <MealGraphDate Data={secondData} />
     </>
   );
 }

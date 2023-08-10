@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Logo from "../../Icon/Logo";
+import Logo from "../../Icon/Logo/index";
 import * as _ from "./style"; // 파일 분리
 
 function Navbar() {

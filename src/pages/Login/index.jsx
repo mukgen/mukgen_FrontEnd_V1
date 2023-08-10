@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import SignButton from "../../components/Button/SignButton";
-import Input from "../../components/Input";
-import Logo from "../../Icon/Logo";
+import SignButton from "../../components/Button/SignButton/index";
+import Input from "../../components/Input/index";
+import Logo from "../../Icon/Logo/index";
 import * as _ from "./style"; // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
 
 function Login() {

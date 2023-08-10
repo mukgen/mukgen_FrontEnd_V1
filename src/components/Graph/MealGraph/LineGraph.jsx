@@ -1,7 +1,7 @@
 import React from "react";
 import { LineAnimateTime } from "./style";  // style 파일에 모으고 필요한 것만 쓰면 될 것 같아 이렇게 만듦
 
-const LineGraph = (data) => {
+const LineGraph = (data = []) => {
   const max = Math.max.apply(
     this,
     data.map((v) => +v.count)

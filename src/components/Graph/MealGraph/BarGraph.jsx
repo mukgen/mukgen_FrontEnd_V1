@@ -1,7 +1,7 @@
 import React from "react";
 import { BarAnimateTime } from "./style"; // style 파일에 모으고 필요한 것만 쓰면 될 것 같아 이렇게 만듦
 
-const BarGraph = (data, color) => {
+const BarGraph = (data = [], color = "#000") => {
   const max = Math.max.apply(
     this,
     data.map((v) => +v.count)

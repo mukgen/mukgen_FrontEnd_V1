@@ -6,7 +6,7 @@ function formatDate(date) {
   return `${month} / ${day}`;
 }
 
-function MealGraphDate({ Data }) {  // 나중에는 Data를 Props로 넘겨줘야하기에 이렇게 바꿈
+function MealGraphDate({ Data = [] }) {  // 나중에는 Data를 Props로 넘겨줘야하기에 이렇게 바꿈
   return (
     <DateBox>
       {Data.map((week, index) => (
