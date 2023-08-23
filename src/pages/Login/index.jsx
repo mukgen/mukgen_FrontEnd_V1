@@ -10,7 +10,7 @@ import * as _ from "./style"; // style.js에서 export한 것을 모두 가져�
 
 function Login() {
   const navigate = useNavigate();
-  const [cookies, setCookies] = useCookies(['accessToken', 'refreshToken']);  // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
+  const [cookies, setCookies] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const [Id, setId] = useState("");
   const [Password, setPassword] = useState("");
   let notNullColor = "#C9CAD0";
@@ -87,5 +87,3 @@ function Login() {
 }
 
 export default Login;
-
-

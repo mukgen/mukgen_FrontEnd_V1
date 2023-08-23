@@ -1,9 +1,10 @@
 import React from "react";
 import * as _ from "./style"; // 파일 분리
+import ModalMain from "../Modal/ModalMain";
 
-function MealReview() {
+function MealReview({ onClick }) {
   return (
-    <_.Review>
+    <_.Review onClick={onClick}>
       <_.StarBox>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +18,7 @@ function MealReview() {
             fill="#FF7A1B"
           />
         </svg>
-        <_.StarNumber>4.5</_.StarNumber>
+        <_.StarNumber>4.0</_.StarNumber>
       </_.StarBox>
       <_.ReviewcontentBox>
         <_.Reviewcontent>시리얼 금지. 아침은 무조건 국물과 밥</_.Reviewcontent>

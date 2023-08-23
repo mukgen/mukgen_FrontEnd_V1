@@ -1,21 +1,24 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import MealSuggestion from "../../components/MealSuggestion/index";
-import MealReview from "../../components/MealMenu/index";
+import MealReview from "../../components/MealReview/index";
 import MealGraph from "../../components/Graph/MealGraph/index";
 import MealGrade from "../../components/Graph/MealGrade/index";
-import * as _ from "./style";  // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
+import ModalMain from "../../components/Modal/ModalMain";
+import * as _ from "./style"; // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
+import Star from "../../components/Modal/Star";
 
 function Main() {
   const navigate = useNavigate();
-  const [cookies, ,] = useCookies(['accessToken', 'refreshToken']); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
+  const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
 
-  const GetData = useCallback(() => { // 렌더링되면 함수가 다시 만들어지는데 그걸 방지하기 위해서 수정함
+  const GetData = useCallback(() => {
+    // 렌더링되면 함수가 다시 만들어지는데 그걸 방지하기 위해서 수정함
     axios({
-      method: "GET",    // GET으로 요청해야하는데 POST로 되어있어 수정함
+      method: "GET", // GET으로 요청해야하는데 POST로 되어있어 수정함
       url: "https://www.mukgen.info/review/all",
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
@@ -37,13 +40,19 @@ function Main() {
 
   useEffect(() => {
     if (!(cookies.accessToken && cookies.refreshToken)) {
-      navigate("/auth/login");
+      // navigate("/auth/login");
     } else {
       GetData();
     }
   }, [cookies, navigate, GetData]); // [] 안에 상수가 수정되면 실행되게 수정함
 
   // <_.Cover></_.Cover>로 감싸기에 <>은 필요없어 삭제함
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const showModal = () => {
+    setModalOpen(true);
+  };
+
   return (
     <_.Cover>
       <_.MainBox>
@@ -57,7 +66,10 @@ function Main() {
         <_.MealReviewBox>
           <_.Title>급식 리뷰</_.Title>
           <_.ReviewBox>
-            <MealReview />
+            <MealReview onClick={showModal} />
+            {modalOpen && (
+              <ModalMain title="모달 제목" setModalOpen={setModalOpen} />
+            )}
           </_.ReviewBox>
         </_.MealReviewBox>
 
