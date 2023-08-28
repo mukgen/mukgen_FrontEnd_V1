@@ -5,8 +5,8 @@ function FillStar() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="60"
-      height="60"
+      width="48"
+      height="48"
       viewBox="0 0 60 60"
       fill="none"
     >
@@ -24,8 +24,8 @@ function EmptyStar() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="60"
-      height="60"
+      width="48"
+      height="48"
       viewBox="0 0 60 60"
       fill="none"
     >

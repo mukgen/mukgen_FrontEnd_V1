@@ -5,10 +5,10 @@ export const Cover = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  padding: 0 40px;
+  padding: 0px 40px;
   background-color: #f5f6f6;
   font-family: Pretendard;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
 `;
 
@@ -18,7 +18,6 @@ export const MainBox = styled.div`
   height: auto;
   flex-direction: row;
   justify-content: flex-start;
-  flex-wrap: wrap;
   gap: 40px;
   margin: auto;
 `;

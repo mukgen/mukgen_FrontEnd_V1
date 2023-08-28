@@ -37,6 +37,7 @@ export const ScoreTitle = styled.p`
   font-size: 16px;
   font-weight: 600;
   margin: 0;
+  white-space: nowrap;
 `;
 
 export const BaseContainer = styled.div`

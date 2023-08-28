@@ -9,7 +9,6 @@ export const Review = styled.div`
   border-radius: 8px;
   background-color: #ffe8bc;
   width: 460px;
-  cursor: pointer;
 `;
 
 export const ReviewcontentBox = styled.div`

@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Header = styled.div`
   top: 0;
-  z-index: 999;
-  position: sticky;
+  z-index: 99;
+  position: fixed;
   display: flex;
   padding: 20px 120px;
   align-items: center;
@@ -27,5 +27,6 @@ export const HeaderLogout = styled.div`
   color: #fe6b01;
   font-size: 16px;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
 `;

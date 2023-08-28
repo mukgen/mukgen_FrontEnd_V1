@@ -48,11 +48,6 @@ function Main() {
 
   // <_.Cover></_.Cover>로 감싸기에 <>은 필요없어 삭제함
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const showModal = () => {
-    setModalOpen(true);
-  };
-
   return (
     <_.Cover>
       <_.MainBox>
@@ -66,10 +61,7 @@ function Main() {
         <_.MealReviewBox>
           <_.Title>급식 리뷰</_.Title>
           <_.ReviewBox>
-            <MealReview onClick={showModal} />
-            {modalOpen && (
-              <ModalMain title="모달 제목" setModalOpen={setModalOpen} />
-            )}
+            <MealReview />
           </_.ReviewBox>
         </_.MealReviewBox>
 

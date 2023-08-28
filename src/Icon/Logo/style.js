@@ -29,4 +29,5 @@ export const LogoSubTitle = styled.p`
   line-height: normal;
   padding: 8px 0 0 10px;
   margin: 0;
+  white-space: nowrap;
 `;

@@ -1,26 +1,38 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Star from "./Star";
 import ModalContent from "./ModalContent";
 import Close from "../../Icon/Close";
+import SuggestionComment from "../MealReview/ReviewComment";
 
-function ModalMain({ title, setModalOpen }) {
-  const closeModal = () => {
-    setModalOpen(false);
+function ModalMain({ title, closeModal, starRating, CommentOpen }) {
+  const [isReviewOpen, setIsReviewOpen] = useState(true);
+
+  const handleBackgroundClick = (event) => {
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
   };
+
   return (
-    <Background>
-      <ReviewContainer>
-        <HeaderContainer>
-          <BlankBox />
-          <HeaderTitle>{title}</HeaderTitle>
-          <Close onClick={closeModal} />
-        </HeaderContainer>
-        <MainBox>
-          {Star(3)}
-          <ModalContent />
-        </MainBox>
-      </ReviewContainer>
+    <Background onClick={handleBackgroundClick}>
+      {isReviewOpen && (
+        <Container>
+          <HeaderContainer>
+            <BlankBox />
+            <HeaderTitle>{title}</HeaderTitle>
+            <Close closeModal={closeModal} />
+          </HeaderContainer>
+          <MainBox>
+            {starRating}
+            <ModalContent
+              contents={"프로젝트가 친절하고 PM이 맛있어요\nGood"}
+              nickname={"이태영"}
+              date={"23.05.07 10:32"}
+            />
+          </MainBox>
+          {CommentOpen && <SuggestionComment />}
+        </Container>
+      )}
     </Background>
   );
 }
@@ -40,30 +52,30 @@ const Background = styled.div`
   background: rgba(0, 0, 0, 0.4);
 `;
 
-const ReviewContainer = styled.div`
+const Container = styled.div`
   display: flex;
-  width: 660px;
-  height: 760px;
+  width: 560px;
+  height: 608px;
   flex-direction: column;
   align-items: center;
   background: #fff;
-  border-radius: 30px;
+  border-radius: 24px;
+  position: relative;
 `;
 
 const MainBox = styled.div`
   display: flex;
-  padding: 16px 24px;
+  padding: 10px 20px 40px 20px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
   width: 100%;
   box-sizing: border-box;
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
-  padding: 12px;
+  padding: 10px;
   width: 100%;
   justify-content: space-between;
   align-items: center;
@@ -72,13 +84,13 @@ const HeaderContainer = styled.div`
 `;
 
 const BlankBox = styled.div`
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
 `;
 
 const HeaderTitle = styled.p`
   color: #6b6c71;
   font-family: Pretendard;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 `;
