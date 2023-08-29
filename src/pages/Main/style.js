@@ -3,13 +3,16 @@ import styled from "styled-components";
 export const Cover = styled.div`
   box-sizing: border-box;
   display: flex;
+  /* width: max-content; */
   width: 100%;
-  height: 100%;
-  padding: 0px 40px;
+  height: max-content;
+  padding: 0px 60px;
   background-color: #f5f6f6;
   font-family: Pretendard;
   justify-content: flex-start;
   align-items: flex-start;
+  position: absolute;
+  top: 80px;
 `;
 
 export const MainBox = styled.div`
@@ -17,7 +20,7 @@ export const MainBox = styled.div`
   width: auto;
   height: auto;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 40px;
   margin: auto;
 `;

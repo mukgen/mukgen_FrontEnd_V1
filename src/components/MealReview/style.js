@@ -7,8 +7,9 @@ export const Review = styled.div`
   flex-direction: row;
   align-items: flex-start;
   border-radius: 8px;
-  background-color: #ffe8bc;
+  background-color: #fff;
   width: 460px;
+  cursor: pointer;
 `;
 
 export const ReviewcontentBox = styled.div`
@@ -42,7 +43,7 @@ export const ReviewName = styled.p`
 `;
 
 export const ReviewDate = styled.p`
-  color: #fe984d;
+  color: #85858d;
   margin: 0;
 `;
 
@@ -57,7 +58,7 @@ export const StarBox = styled.div`
 `;
 
 export const StarNumber = styled.div`
-  color: #fe6b01;
+  color: #ff7a1b;
   font-size: 16px;
   font-weight: 400;
 `;

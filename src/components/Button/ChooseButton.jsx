@@ -1,13 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 
-function ChooseButton({ buttonText, okButton }) {
-  return <Button okButton={okButton}>{buttonText}</Button>;
+function ChooseButton({ buttonText, okButton, onClick }) {
+  return (
+    <Button onClick={onClick} okButton={okButton}>
+      {buttonText}
+    </Button>
+  );
 }
 
 export default ChooseButton;
 
-const Button = styled.div`
+const Button = styled.button`
+  outline: none;
   display: flex;
   padding: 12px 48px;
   flex-direction: column;

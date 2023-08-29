@@ -4,19 +4,30 @@ import Heart from "../../Icon/Heart";
 import Reject from "../../Icon/Reject";
 import ChooseButton from "../Button/ChooseButton";
 import Check from "../../Icon/Check";
+import Uncheck from "../../Icon/Uncheck";
 
 function MealSuggestion() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [checkColor, setCheckColor] = useState("#FFD382");
+  const [rejectButton, setRejectButton] = useState(true);
   const openModal = () => {
     setModalOpen(!modalOpen);
   };
+  const toggleCheckColor = () => {
+    setCheckColor(checkColor === "#FF7A1B" ? "#FFD382" : "#FF7A1B");
+  };
+  const toggleRejectButton = () => {
+    setRejectButton(!rejectButton);
+    setCheckColor("#FFD382");
+  };
+
   return (
     <>
       <_.List onClick={openModal}>
         <_.ListMain>
           <_.ListInfo>
             <_.ListName>이태영</_.ListName>
-            <Check />
+            {rejectButton ? <Check fillColor={checkColor} /> : <Uncheck />}
           </_.ListInfo>
           <_.Listcontent bool={modalOpen}>
             햄스터는 작고 귀여운 설치류 동물로, 애완동물로 인기가 높다.
@@ -39,12 +50,14 @@ function MealSuggestion() {
           </_.BottomBox>
         </_.ListMain>
         {modalOpen && (
-          <>
-            <_.ButtonBox>
-              <ChooseButton buttonText="거절" />
-              <ChooseButton buttonText="수락" okButton />
-            </_.ButtonBox>
-          </>
+          <_.ButtonBox>
+            <ChooseButton onClick={toggleRejectButton} buttonText="거절" />
+            <ChooseButton
+              onClick={toggleCheckColor}
+              buttonText="수락"
+              okButton
+            />
+          </_.ButtonBox>
         )}
       </_.List>
       {/* {modalOpen && (
