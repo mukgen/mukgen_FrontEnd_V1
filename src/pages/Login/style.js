@@ -5,7 +5,10 @@ export const Main = styled.div`
   padding: 40px 0;
   justify-content: center;
   align-items: flex-start;
-  height: calc(100vh - 168px);
+  height: calc(100vh - 340px);
+
+  @media (min-width: none) {
+  }
 `;
 
 export const LoginBox = styled.div`

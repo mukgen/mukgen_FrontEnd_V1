@@ -4,7 +4,7 @@ export const Cover = styled.div`
   box-sizing: border-box;
   display: flex;
   /* width: max-content; */
-  width: 100%;
+  width: max-content;
   height: max-content;
   padding: 0px 60px;
   background-color: #f5f6f6;
