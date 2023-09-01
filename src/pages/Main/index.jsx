@@ -19,9 +19,10 @@ function Main() {
     // 렌더링되면 함수가 다시 만들어지는데 그걸 방지하기 위해서 수정함
     axios({
       method: "GET", // GET으로 요청해야하는데 POST로 되어있어 수정함
-      url: "https://www.mukgen.info/review/all",
+      url: "https://stag-server.xquare.app/mukgen/review/all",
       headers: {
         Authorization: `Bearer ${cookies.accessToken}`,
+        "X-Not-Using-Xquare-Auth": true,
       },
     })
       .then((res) => {
@@ -40,7 +41,7 @@ function Main() {
 
   useEffect(() => {
     if (!(cookies.accessToken && cookies.refreshToken)) {
-      // navigate("/auth/login");
+      navigate("/auth/login");
     } else {
       GetData();
     }

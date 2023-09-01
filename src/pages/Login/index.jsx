@@ -7,8 +7,13 @@ import SignButton from "../../components/Button/SignButton/index";
 import Input from "../../components/Input/index";
 import Logo from "../../Icon/Logo/index";
 import * as _ from "./style"; // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
+import { useMediaQuery } from "react-responsive";
 
 function Login() {
+  const isMobile = useMediaQuery({
+    query: "(max-width:600px)",
+  });
+
   const navigate = useNavigate();
   const [cookies, setCookies] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const [Id, setId] = useState("");
@@ -24,7 +29,10 @@ function Login() {
     if (!(Id && Password)) return;
     axios({
       method: "POST",
-      url: "https://www.mukgen.info/auth/login/chef",
+      url: "https://stag-server.xquare.app/mukgen/auth/login/chef",
+      headers: {
+        "X-Not-Using-Xquare-Auth": true,
+      },
       data: {
         accountId: Id,
         password: Password,

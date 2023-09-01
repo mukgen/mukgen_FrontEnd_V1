@@ -15,9 +15,10 @@ function MealSuggestion() {
   };
   const toggleCheckColor = () => {
     setCheckColor(checkColor === "#FF7A1B" ? "#FFD382" : "#FF7A1B");
+    setRejectButton(true);
   };
   const toggleRejectButton = () => {
-    setRejectButton(!rejectButton);
+    setRejectButton((prev) => (prev === true ? false : true));
     setCheckColor("#FFD382");
   };
 
