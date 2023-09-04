@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ModalContent from "./ModalContent";
 import Close from "../../Icon/Close";
-import SuggestionComment from "../MealReview/ReviewComment";
+import ReviewComment from "../MealReview/ReviewComment";
 
 function ModalMain({ title, closeModal, starRating, CommentOpen }) {
   const [isReviewOpen, setIsReviewOpen] = useState(true);
@@ -22,15 +22,17 @@ function ModalMain({ title, closeModal, starRating, CommentOpen }) {
             <HeaderTitle>{title}</HeaderTitle>
             <Close closeModal={closeModal} />
           </HeaderContainer>
-          <MainBox>
-            {starRating}
-            <ModalContent
-              contents={"프로젝트가 친절하고 PM이 맛있어요\nGood"}
-              nickname={"이태영"}
-              date={"23.05.07 10:32"}
-            />
-          </MainBox>
-          {CommentOpen && <SuggestionComment />}
+          <Box>
+            <MainBox>
+              {starRating}
+              <ModalContent
+                contents={"프로젝트가 친절하고 PM이 맛있어요\nGood"}
+                nickname={"이태영"}
+                date={"23.05.07 10:32"}
+              />
+            </MainBox>
+            {CommentOpen && <ReviewComment />}
+          </Box>
         </Container>
       )}
     </Background>
@@ -38,6 +40,22 @@ function ModalMain({ title, closeModal, starRating, CommentOpen }) {
 }
 
 export default ModalMain;
+
+const Box = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 1px;
+  }
+`;
 
 const Background = styled.div`
   width: 100vw;

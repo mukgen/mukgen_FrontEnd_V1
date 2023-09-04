@@ -48,6 +48,7 @@ function Login() {
       })
       .catch((err) => {
         toast.error("네트워크를 확인해주세요!");
+        console.log(err);
       });
   };
 
