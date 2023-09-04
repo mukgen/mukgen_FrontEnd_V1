@@ -4,29 +4,6 @@ import * as _ from "./style"; // style.js에서 export한 것을 모두 가져�
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
-const data = [
-  {
-    id: "Score5",
-    num: 9,
-  },
-  {
-    id: "Score4",
-    num: 5,
-  },
-  {
-    id: "Score3",
-    num: 0,
-  },
-  {
-    id: "Score2",
-    num: 1,
-  },
-  {
-    id: "Score1",
-    num: 2,
-  },
-];
-
 function MealGrade() {
   const [sum, setSum] = useState(0);
   const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
@@ -42,7 +19,7 @@ function MealGrade() {
       },
     })
       .then((res) => {
-        data = Object.entries(res.data).map((v) => {
+        const data = Object.entries(res.data).map((v) => {
           return {
             id: v[0],
             num: v[1],
