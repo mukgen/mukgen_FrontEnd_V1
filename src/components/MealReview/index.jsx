@@ -41,7 +41,6 @@ function MealReview() {
           title="급식 리뷰"
           closeModal={() => setModalOpen(false)}
           starRating={Star(4)}
-          CommentOpen
         />
       )}
     </>
