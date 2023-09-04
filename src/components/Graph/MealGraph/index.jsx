@@ -7,43 +7,10 @@ import Texts from "./Texts"; // 파일을 분리하는 편이 깔끔해보일 �
 import { GraphBox } from "./style"; // style 파일에 모으고 필요한 것만 쓰면 될 것 같아 이렇게 만듦
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-
-const secondData = [
-  {
-    date: "7/10",
-    count: 3,
-  },
-  {
-    date: "7/11",
-    count: 4,
-  },
-  {
-    date: "7/12",
-    count: 1,
-  },
-  {
-    date: "7/13",
-    count: 5,
-  },
-  {
-    date: "7/14",
-    count: 4,
-  },
-  {
-    date: "7/15",
-    count: 1,
-  },
-  {
-    date: "7/16",
-    count: 4,
-  },
-];
 
 function MealGraph() {
   const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const [statisticsData, setStatistics] = useState([]);
-  const navigate = useNavigate;
 
   const GetMealSuggestion = useCallback(() => {
     axios({
@@ -67,15 +34,13 @@ function MealGraph() {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   useEffect(() => {
-    if (!(cookies.accessToken && cookies.refreshToken)) {
-      navigate("/auth/login");
-    } else {
+    if (cookies.accessToken && cookies.refreshToken) {
       GetMealSuggestion();
     }
-  }, [cookies, navigate, GetMealSuggestion]); // [] 안에 상수가 수정되면 실행되게 수정함
+  }, [cookies, GetMealSuggestion]); // [] 안에 상수가 수정되면 실행되게 수정함
 
   return (
     <>

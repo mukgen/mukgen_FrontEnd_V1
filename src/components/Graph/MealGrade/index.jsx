@@ -1,6 +1,8 @@
-import React from "react";
-import Score from "./Score";  // 깔끔하게 보기위해 파일을 나누었다.
+import React, { useCallback, useEffect, useState } from "react";
+import Score from "./Score"; // 깔끔하게 보기위해 파일을 나누었다.
 import * as _ from "./style"; // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const data = [
   {
@@ -26,8 +28,42 @@ const data = [
 ];
 
 function MealGrade() {
-  const sum = data.map((item) => item.num).reduce((acc, curr) => acc + curr, 0);
-  
+  const [sum, setSum] = useState(0);
+  const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
+  const [statisticsData, setStatistics] = useState([]);
+
+  const GetReview = useCallback(() => {
+    axios({
+      method: "GET",
+      url: "https://stag-server.xquare.app/mukgen/review/statistics",
+      headers: {
+        Authorization: `Bearer ${cookies.accessToken}`,
+        "X-Not-Using-Xquare-Auth": true,
+      },
+    })
+      .then((res) => {
+        data = Object.entries(res.data).map((v) => {
+          return {
+            id: v[0],
+            num: v[1],
+          };
+        });
+        setStatistics(data);
+        setSum(
+          data.map((item) => item.num).reduce((acc, curr) => acc + curr, 0)
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (cookies.accessToken && cookies.refreshToken) {
+      GetReview();
+    }
+  }, [cookies, GetReview]); // [] 안에 상수가 수정되면 실행되게 수정함
+
   return (
     <>
       <_.ScoreBox>
@@ -44,12 +80,17 @@ function MealGrade() {
               fill="#FF7A1B"
             />
           </svg>
-          <_.ScoreMean>4.43</_.ScoreMean>
+          <_.ScoreMean>{(sum / 5).toFixed(2)}</_.ScoreMean>
         </_.ScoreMeanBox>
         <_.Container>
-          {data.map((e, i) => ( // 파일을 나누었기에 sum을 보내주어야한다.
-            <Score key={i} num={e.num} index={i} sum={sum} />
-          ))}
+          {statisticsData.map(
+            (
+              e,
+              i // 파일을 나누었기에 sum을 보내주어야한다.
+            ) => (
+              <Score key={i} num={e.num} index={i} sum={sum} />
+            )
+          )}
         </_.Container>
       </_.ScoreBox>
     </>
