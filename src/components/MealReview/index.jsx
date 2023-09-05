@@ -3,7 +3,7 @@ import * as _ from "./style"; // 파일 분리
 import ModalMain from "../Modal/ModalMain";
 import Star from "../Modal/Star";
 
-function MealReview() {
+function MealReview({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {
     setModalOpen(true);
@@ -24,15 +24,13 @@ function MealReview() {
               fill="#FF7A1B"
             />
           </svg>
-          <_.StarNumber>4.0</_.StarNumber>
+          <_.StarNumber>{data.count}</_.StarNumber>
         </_.StarBox>
         <_.ReviewcontentBox>
-          <_.Reviewcontent>
-            시리얼 금지. 아침은 무조건 국물과 밥
-          </_.Reviewcontent>
+          <_.Reviewcontent>{data.content}</_.Reviewcontent>
           <_.ReviewInfo>
-            <_.ReviewName>이태영</_.ReviewName>
-            <_.ReviewDate>23.05.07 10:32</_.ReviewDate>
+            <_.ReviewName>{data.userNickname}</_.ReviewName>
+            <_.ReviewDate>{data.createdAt}</_.ReviewDate>
           </_.ReviewInfo>
         </_.ReviewcontentBox>
       </_.Review>
@@ -40,7 +38,7 @@ function MealReview() {
         <ModalMain
           title="급식 리뷰"
           closeModal={() => setModalOpen(false)}
-          starRating={Star(4)}
+          starRating={Star(data.count)}
         />
       )}
     </>
