@@ -10,6 +10,7 @@ function MealReview({ data }) {
     setModalOpen(true);
   };
 
+  const createDate = new Date(data.createdAt);
   return (
     <>
       <_.Review onClick={openModal}>
@@ -32,7 +33,7 @@ function MealReview({ data }) {
           <_.Reviewcontent>{data.content}</_.Reviewcontent>
           <_.ReviewInfo>
             <_.ReviewName>{data.userNickname}</_.ReviewName>
-            <_.ReviewDate>{data.createdAt}</_.ReviewDate>
+            <_.ReviewDate>{createDate}</_.ReviewDate>
           </_.ReviewInfo>
         </_.ReviewcontentBox>
       </_.Review>
@@ -41,6 +42,7 @@ function MealReview({ data }) {
           title="급식 리뷰"
           closeModal={() => setModalOpen(false)}
           starRating={Star(data.count)}
+          data={data}
         />
       )}
     </>
