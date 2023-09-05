@@ -12,8 +12,9 @@ import * as _ from "./style"; // style.js에서 export한 것을 모두 가져�
 import Star from "../../components/Modal/Star";
 
 function Main() {
-  const navigate = useNavigate();
   const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
+  const [reviewData, setReview] = useState([]);
+  const navigate = useNavigate();
 
   const GetData = useCallback(() => {
     // 렌더링되면 함수가 다시 만들어지는데 그걸 방지하기 위해서 수정함
@@ -29,6 +30,7 @@ function Main() {
         toast.success("성공적으로 데이터를 불러왔습니다.", {
           icon: "🍊",
         });
+        setReview(res.data.reviewMaximumResponseList);
         // 서비스 중 data가 콘솔에 나타나면 안되기에 console 주석 처리
         // console.log(res.data);
       })
@@ -39,13 +41,13 @@ function Main() {
       });
   }, [cookies]);
 
-  useEffect(() => {
-    if (!(cookies.accessToken && cookies.refreshToken)) {
-      navigate("/auth/login");
-    } else {
-      GetData();
-    }
-  }, [cookies, navigate, GetData]); // [] 안에 상수가 수정되면 실행되게 수정함
+  // useEffect(() => {
+  //   if (!(cookies.accessToken && cookies.refreshToken)) {
+  //     navigate("/auth/login");
+  //   } else {
+  //     GetData();
+  //   }
+  // }, [cookies, navigate, GetData]); // [] 안에 상수가 수정되면 실행되게 수정함
 
   // <_.Cover></_.Cover>로 감싸기에 <>은 필요없어 삭제함
 
@@ -62,7 +64,9 @@ function Main() {
         <_.MealReviewBox>
           <_.Title>급식 리뷰</_.Title>
           <_.ReviewBox>
-            <MealReview />
+            {reviewData.map((v, i) => (
+              <MealReview key={`${v.content}${i}`} data={reviewData} />
+            ))}
           </_.ReviewBox>
         </_.MealReviewBox>
 
