@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Comment from "../Comment";
 import Upload from "../../Icon/Upload";
 function ReviewComment({ uploadComment }) {
   const [inputFocused, setInputFocused] = useState(false);
@@ -20,8 +19,6 @@ function ReviewComment({ uploadComment }) {
       const year = date.getFullYear();
       const month = ("0" + (date.getMonth() + 1)).slice(-2);
       const day = ("0" + date.getDate()).slice(-2);
-      // const hour = date.getHours();
-      // const minute = date.getMinutes();
       const time = new Date().toTimeString().split(" ")[0].slice(0, 5);
       const commentDate = `${year}.${month}.${day} ${time}`;
 
