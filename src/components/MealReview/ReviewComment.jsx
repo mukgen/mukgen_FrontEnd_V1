@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Comment from "../Comment";
 import Upload from "../../Icon/Upload";
 function ReviewComment({ uploadComment }) {
   const [inputFocused, setInputFocused] = useState(false);
