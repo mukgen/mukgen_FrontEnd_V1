@@ -5,9 +5,11 @@ import Star from "../Modal/Star";
 
 function MealReview({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
+
   const openModal = () => {
     setModalOpen(true);
   };
+
   return (
     <>
       <_.Review onClick={openModal}>

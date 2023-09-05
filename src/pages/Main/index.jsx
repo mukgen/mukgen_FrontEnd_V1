@@ -65,7 +65,7 @@ function Main() {
           <_.Title>급식 리뷰</_.Title>
           <_.ReviewBox>
             {reviewData.map((v, i) => (
-              <MealReview key={`${v.content}${i}`} data={reviewData} />
+              <MealReview key={`${v.content}${i}`} data={v} />
             ))}
           </_.ReviewBox>
         </_.MealReviewBox>
