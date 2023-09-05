@@ -6,6 +6,7 @@ import axios from "axios";
 
 function MealGrade() {
   const [sum, setSum] = useState(0);
+  const [avg, setAVG] = useState(0);
   const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const [statisticsData, setStatistics] = useState([]);
 
@@ -19,16 +20,19 @@ function MealGrade() {
       },
     })
       .then((res) => {
-        const data = Object.entries(res.data).map((v) => {
-          return {
-            id: v[0],
-            num: v[1],
-          };
-        });
+        const data = Object.entries(res.data)
+          .slice(0, 5)
+          .map((v) => {
+            return {
+              id: v[0],
+              num: v[1],
+            };
+          });
         setStatistics(data);
         setSum(
           data.map((item) => item.num).reduce((acc, curr) => acc + curr, 0)
         );
+        setAVG(res.data.average);
       })
       .catch((err) => {
         console.log(err);
@@ -57,7 +61,7 @@ function MealGrade() {
               fill="#FF7A1B"
             />
           </svg>
-          <_.ScoreMean>{(sum / 5).toFixed(2)}</_.ScoreMean>
+          <_.ScoreMean>{avg}</_.ScoreMean>
         </_.ScoreMeanBox>
         <_.Container>
           {statisticsData.map(

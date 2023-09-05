@@ -61,9 +61,6 @@ function MealSuggestion() {
           </_.ButtonBox>
         )}
       </_.List>
-      {/* {modalOpen && (
-        <ModalMain title="급식 건의" closeModal={() => setModalOpen(false)} />
-      )} */}
     </>
   );
 }
