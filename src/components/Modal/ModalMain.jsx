@@ -5,7 +5,7 @@ import Close from "../../Icon/Close";
 import ReviewComment from "../MealReview/ReviewComment";
 import Comment from "../Comment";
 
-function ModalMain({ title, closeModal, starRating, data }) {
+function ModalMain({ title, closeModal, starRating, data, createDate }) {
   const [isReviewOpen, setIsReviewOpen] = useState(true);
   const [comments, setComments] = useState([]);
 
@@ -30,7 +30,7 @@ function ModalMain({ title, closeModal, starRating, data }) {
               <ModalContent
                 contents={data.content}
                 nickname={data.userNickname}
-                date={data.createAt}
+                createDate={createDate}
               />
             </MainBox>
             <CommentContainer>
