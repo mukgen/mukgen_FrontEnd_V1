@@ -10,7 +10,7 @@ function MealReview({ data }) {
     setModalOpen(true);
   };
 
-  const createData = new Date(data.createAt);
+  const createData = new Date(data.createdAt);
   const year = createData.getFullYear().toString().slice(2);
   const month = (createData.getMonth() + 1).toString().padStart(2, "0");
   const day = createData.getDate().toString().padStart(2, "0");
