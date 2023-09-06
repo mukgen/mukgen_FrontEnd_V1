@@ -6,7 +6,7 @@ import ChooseButton from "../Button/ChooseButton";
 import Check from "../../Icon/Check";
 import Uncheck from "../../Icon/Uncheck";
 
-function MealSuggestion() {
+function MealSuggestion({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [checkColor, setCheckColor] = useState("#FFD382");
   const [rejectButton, setRejectButton] = useState(true);
@@ -22,30 +22,34 @@ function MealSuggestion() {
     setCheckColor("#FFD382");
   };
 
+  const createData = new Date(data.createdAt);
+  const year = createData.getFullYear().toString().slice(2);
+  const month = (createData.getMonth() + 1).toString().padStart(2, "0");
+  const day = createData.getDate().toString().padStart(2, "0");
+  const hours = createData.getHours().toString().padStart(2, "0");
+  const minutes = createData.getMinutes().toString().padStart(2, "0");
+
+  const formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
   return (
     <>
       <_.List onClick={openModal}>
         <_.ListMain>
           <_.ListInfo>
-            <_.ListName>이태영</_.ListName>
+            <_.ListName>ㅇㅇ</_.ListName>
             {rejectButton ? <Check fillColor={checkColor} /> : <Uncheck />}
           </_.ListInfo>
-          <_.Listcontent bool={modalOpen}>
-            햄스터는 작고 귀여운 설치류 동물로, 애완동물로 인기가 높다.
-            밤행성이라 주로 밤에 활동하며 차분한 성격과 다양한 모습이
-            매력적이다. 작은 몸에 부드러운 모피와 귀여운 눈이 특징이
-          </_.Listcontent>
+          <_.Listcontent bool={modalOpen}>{data.content}</_.Listcontent>
 
           <_.BottomBox>
-            <_.ListDate>23.05.07 10:32</_.ListDate>
+            <_.ListDate>{formattedDate}</_.ListDate>
             <_.EmojiBox>
               <_.Emoji>
                 <Heart />
-                <_.EmojiNumber>31</_.EmojiNumber>
+                <_.EmojiNumber>{data.likeCount}</_.EmojiNumber>
               </_.Emoji>
               <_.Emoji>
                 <Reject />
-                <_.EmojiNumber>133</_.EmojiNumber>
+                <_.EmojiNumber>{data.dislikeCount}</_.EmojiNumber>
               </_.Emoji>
             </_.EmojiBox>
           </_.BottomBox>
