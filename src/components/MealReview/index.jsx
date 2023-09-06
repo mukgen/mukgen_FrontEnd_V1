@@ -10,7 +10,15 @@ function MealReview({ data }) {
     setModalOpen(true);
   };
 
-  const createDate = new Date(data.createdAt);
+  const createData = new Date(data.createAt);
+  const year = createData.getFullYear().toString().slice(2);
+  const month = (createData.getMonth() + 1).toString().padStart(2, "0");
+  const day = createData.getDate().toString().padStart(2, "0");
+  const hours = createData.getHours().toString().padStart(2, "0");
+  const minutes = createData.getMinutes().toString().padStart(2, "0");
+
+  const formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
+
   return (
     <>
       <_.Review onClick={openModal}>
@@ -33,7 +41,7 @@ function MealReview({ data }) {
           <_.Reviewcontent>{data.content}</_.Reviewcontent>
           <_.ReviewInfo>
             <_.ReviewName>{data.userNickname}</_.ReviewName>
-            <_.ReviewDate>{createDate}</_.ReviewDate>
+            <_.ReviewDate>{formattedDate}</_.ReviewDate>
           </_.ReviewInfo>
         </_.ReviewcontentBox>
       </_.Review>
@@ -43,6 +51,7 @@ function MealReview({ data }) {
           closeModal={() => setModalOpen(false)}
           starRating={Star(data.count)}
           data={data}
+          createDate={formattedDate}
         />
       )}
     </>

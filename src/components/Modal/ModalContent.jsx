@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
-function ModalContent({ nickname, date, contents }) {
+function ModalContent({ nickname, createDate, contents }) {
   return (
     <>
       <ContentBox>{contents}</ContentBox>
       <ContentInfoBox>
         <UserName>{nickname}</UserName>
-        <ContentDate>{date}</ContentDate>
+        <ContentDate>{createDate}</ContentDate>
       </ContentInfoBox>
     </>
   );
