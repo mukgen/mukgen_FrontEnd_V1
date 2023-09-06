@@ -7,13 +7,12 @@ import MealSuggestion from "../../components/MealSuggestion/index";
 import MealReview from "../../components/MealReview/index";
 import MealGraph from "../../components/Graph/MealGraph/index";
 import MealGrade from "../../components/Graph/MealGrade/index";
-import ModalMain from "../../components/Modal/ModalMain";
 import * as _ from "./style"; // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
-import Star from "../../components/Modal/Star";
 
 function Main() {
   const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const [reviewData, setReview] = useState([]);
+  const [suggestionData, setSuggestion] = useState([]);
   const navigate = useNavigate();
 
   const GetData = useCallback(() => {
@@ -41,13 +40,38 @@ function Main() {
       });
   }, [cookies]);
 
-  useEffect(() => {
-    if (!(cookies.accessToken && cookies.refreshToken)) {
-      navigate("/auth/login");
-    } else {
-      GetData();
-    }
-  }, [cookies, navigate, GetData]); // [] 안에 상수가 수정되면 실행되게 수정함
+  const GetSugData = useCallback(() => {
+    axios({
+      method: "GET", // GET으로 요청해야하는데 POST로 되어있어 수정함
+      url: "https://stag-server.xquare.app/mukgen/meal-suggestion/list",
+      headers: {
+        Authorization: `Bearer ${cookies.accessToken}`,
+        "X-Not-Using-Xquare-Auth": true,
+      },
+    })
+      .then((res) => {
+        toast.success("성공적으로 데이터를 불러왔습니다.", {
+          icon: "🍊",
+        });
+        setReview(res.data.reviewMaximumResponseList);
+        // 서비스 중 data가 콘솔에 나타나면 안되기에 console 주석 처리
+        // console.log(res.data);
+      })
+      .catch((err) => {
+        toast.error("네트워크를 확인해주세요!");
+        // 이 오류도 마찬가지로 주석 처리
+        // console.log(err);
+      });
+  }, [cookies]);
+
+  // useEffect(() => {
+  //   if (!(cookies.accessToken && cookies.refreshToken)) {
+  //     navigate("/auth/login");
+  //   } else {
+  //     GetData();
+  //     GetSugData();
+  //   }
+  // }, [cookies, navigate, GetData, GetSugData]); // [] 안에 상수가 수정되면 실행되게 수정함
 
   // <_.Cover></_.Cover>로 감싸기에 <>은 필요없어 삭제함
 
@@ -57,7 +81,9 @@ function Main() {
         <_.MealSuggestionBox>
           <_.Title>급식 건의</_.Title>
           <_.ListBox>
-            <MealSuggestion />
+            {suggestionData.map((v, i) => (
+              <MealSuggestion data={v} />
+            ))}
           </_.ListBox>
         </_.MealSuggestionBox>
 
