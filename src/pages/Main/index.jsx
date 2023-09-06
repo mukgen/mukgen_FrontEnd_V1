@@ -41,13 +41,13 @@ function Main() {
       });
   }, [cookies]);
 
-  // useEffect(() => {
-  //   if (!(cookies.accessToken && cookies.refreshToken)) {
-  //     navigate("/auth/login");
-  //   } else {
-  //     GetData();
-  //   }
-  // }, [cookies, navigate, GetData]); // [] 안에 상수가 수정되면 실행되게 수정함
+  useEffect(() => {
+    if (!(cookies.accessToken && cookies.refreshToken)) {
+      navigate("/auth/login");
+    } else {
+      GetData();
+    }
+  }, [cookies, navigate, GetData]); // [] 안에 상수가 수정되면 실행되게 수정함
 
   // <_.Cover></_.Cover>로 감싸기에 <>은 필요없어 삭제함
 
@@ -65,7 +65,7 @@ function Main() {
           <_.Title>급식 리뷰</_.Title>
           <_.ReviewBox>
             {reviewData.map((v, i) => (
-              <MealReview key={`${v.content}${i}`} data={reviewData} />
+              <MealReview key={`${v.content}${i}`} data={v} />
             ))}
           </_.ReviewBox>
         </_.MealReviewBox>
