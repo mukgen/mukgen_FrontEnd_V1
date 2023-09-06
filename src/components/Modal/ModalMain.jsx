@@ -5,7 +5,7 @@ import Close from "../../Icon/Close";
 import ReviewComment from "../MealReview/ReviewComment";
 import Comment from "../Comment";
 
-function ModalMain({ title, closeModal, starRating, CommentOpen }) {
+function ModalMain({ title, closeModal, starRating, data, createDate }) {
   const [isReviewOpen, setIsReviewOpen] = useState(true);
   const [comments, setComments] = useState([]);
 
@@ -28,9 +28,9 @@ function ModalMain({ title, closeModal, starRating, CommentOpen }) {
             <MainBox>
               {starRating}
               <ModalContent
-                contents={"프로젝트가 친절하고 PM이 맛있어요\nGood"}
-                nickname={"이태영"}
-                date={"23.05.07 10:32"}
+                contents={data.content}
+                nickname={data.userNickname}
+                createDate={createDate}
               />
             </MainBox>
             <CommentContainer>
