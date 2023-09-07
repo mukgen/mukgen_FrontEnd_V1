@@ -1,25 +1,19 @@
 import React, { useState } from "react";
+import { toast } from "react-hot-toast";
 import * as _ from "./style"; // 파일 분리
 import Heart from "../../Icon/Heart";
 import Reject from "../../Icon/Reject";
 import ChooseButton from "../Button/ChooseButton";
 import Check from "../../Icon/Check";
-import Uncheck from "../../Icon/Uncheck";
 
 function MealSuggestion({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [checkColor, setCheckColor] = useState("#FFD382");
-  const [rejectButton, setRejectButton] = useState(true);
   const openModal = () => {
     setModalOpen(!modalOpen);
   };
   const toggleCheckColor = () => {
     setCheckColor(checkColor === "#FF7A1B" ? "#FFD382" : "#FF7A1B");
-    setRejectButton(true);
-  };
-  const toggleRejectButton = () => {
-    setRejectButton((prev) => (prev === true ? false : true));
-    setCheckColor("#FFD382");
   };
 
   const createData = new Date(data.createdAt);
@@ -30,13 +24,34 @@ function MealSuggestion({ data }) {
   const minutes = createData.getMinutes().toString().padStart(2, "0");
 
   const formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
+
+  const PostLogin = () => {
+    if (!(Id && Password)) return;
+    axios({
+      method: "POST",
+      url: "https://stag-server.xquare.app/mukgen/meal-suggestion/check/{mealSuggestionId}",
+      headers: {
+        Authorization: `Bearer ${cookies.accessToken}`,
+        "X-Not-Using-Xquare-Auth": true,
+      },
+    })
+      .then((res) => {
+        toast.success("수락되었습니다", {
+          icon: "✅",
+        });
+      })
+      .catch((err) => {
+        toast.error("네트워크를 확인해주세요!");
+      });
+  };
+
   return (
     <>
       <_.List onClick={openModal}>
         <_.ListMain>
           <_.ListInfo>
             <_.ListName>ㅇㅇ</_.ListName>
-            {rejectButton ? <Check fillColor={checkColor} /> : <Uncheck />}
+            <Check fillColor={checkColor} />
           </_.ListInfo>
           <_.Listcontent bool={modalOpen}>{data.content}</_.Listcontent>
 
@@ -56,7 +71,6 @@ function MealSuggestion({ data }) {
         </_.ListMain>
         {modalOpen && (
           <_.ButtonBox>
-            <ChooseButton onClick={toggleRejectButton} buttonText="거절" />
             <ChooseButton
               onClick={toggleCheckColor}
               buttonText="수락"

@@ -12,7 +12,32 @@ import * as _ from "./style"; // style.js에서 export한 것을 모두 가져�
 function Main() {
   const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const [reviewData, setReview] = useState([]);
-  const [suggestionData, setSuggestion] = useState([]);
+  const [suggestionData, setSuggestion] = useState([
+    {
+      id: 1,
+      content: "dfgdfggdfg",
+      likeCount: 5,
+      dislikeCount: 4,
+      createdAt: "2023-09-01T09:20:28.223465",
+      checked: false,
+    },
+    {
+      id: 2,
+      content: "ㅣ자스",
+      likeCount: 2,
+      dislikeCount: 0,
+      createdAt: "2023-09-02T13:17:19.743531",
+      checked: false,
+    },
+    {
+      id: 3,
+      content: "먹젠 플러터 ㄹㅈㄷ",
+      likeCount: 22,
+      dislikeCount: 1,
+      createdAt: "2023-09-02T13:18:39.052306",
+      checked: false,
+    },
+  ]);
   const navigate = useNavigate();
 
   const GetData = useCallback(() => {
@@ -53,9 +78,7 @@ function Main() {
         toast.success("성공적으로 데이터를 불러왔습니다.", {
           icon: "🍊",
         });
-        setReview(res.data.reviewMaximumResponseList);
-        // 서비스 중 data가 콘솔에 나타나면 안되기에 console 주석 처리
-        // console.log(res.data);
+        setSuggestion(res.data.mealSuggestionResponseList);
       })
       .catch((err) => {
         toast.error("네트워크를 확인해주세요!");
