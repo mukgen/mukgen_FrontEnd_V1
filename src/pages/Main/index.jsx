@@ -80,7 +80,7 @@ function Main() {
           <_.Title>급식 건의</_.Title>
           <_.ListBox>
             {suggestionData.map((v, i) => (
-              <MealSuggestion data={v} postChecked={PostCheck} />
+              <MealSuggestion data={v} />
             ))}
           </_.ListBox>
         </_.MealSuggestionBox>
