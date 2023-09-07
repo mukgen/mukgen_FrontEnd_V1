@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 import * as _ from "./style"; // 파일 분리
 import Heart from "../../Icon/Heart";
 import Reject from "../../Icon/Reject";
 import ChooseButton from "../Button/ChooseButton";
 import Check from "../../Icon/Check";
-
 function MealSuggestion({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [checkColor, setCheckColor] = useState("#FFD382");
@@ -24,26 +25,6 @@ function MealSuggestion({ data }) {
   const minutes = createData.getMinutes().toString().padStart(2, "0");
 
   const formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
-
-  const PostLogin = () => {
-    if (!(Id && Password)) return;
-    axios({
-      method: "POST",
-      url: "https://stag-server.xquare.app/mukgen/meal-suggestion/check/{mealSuggestionId}",
-      headers: {
-        Authorization: `Bearer ${cookies.accessToken}`,
-        "X-Not-Using-Xquare-Auth": true,
-      },
-    })
-      .then((res) => {
-        toast.success("수락되었습니다", {
-          icon: "✅",
-        });
-      })
-      .catch((err) => {
-        toast.error("네트워크를 확인해주세요!");
-      });
-  };
 
   return (
     <>
@@ -71,11 +52,7 @@ function MealSuggestion({ data }) {
         </_.ListMain>
         {modalOpen && (
           <_.ButtonBox>
-            <ChooseButton
-              onClick={toggleCheckColor}
-              buttonText="수락"
-              okButton
-            />
+            <ChooseButton onClick={toggleCheckColor} buttonText="수락" />
           </_.ButtonBox>
         )}
       </_.List>
