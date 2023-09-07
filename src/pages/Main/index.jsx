@@ -53,9 +53,7 @@ function Main() {
         toast.success("성공적으로 데이터를 불러왔습니다.", {
           icon: "🍊",
         });
-        setReview(res.data.reviewMaximumResponseList);
-        // 서비스 중 data가 콘솔에 나타나면 안되기에 console 주석 처리
-        // console.log(res.data);
+        setSuggestion(res.data.mealSuggestionResponseList);
       })
       .catch((err) => {
         toast.error("네트워크를 확인해주세요!");
@@ -64,14 +62,14 @@ function Main() {
       });
   }, [cookies]);
 
-  // useEffect(() => {
-  //   if (!(cookies.accessToken && cookies.refreshToken)) {
-  //     navigate("/auth/login");
-  //   } else {
-  //     GetData();
-  //     GetSugData();
-  //   }
-  // }, [cookies, navigate, GetData, GetSugData]); // [] 안에 상수가 수정되면 실행되게 수정함
+  useEffect(() => {
+    if (!(cookies.accessToken && cookies.refreshToken)) {
+      navigate("/auth/login");
+    } else {
+      GetData();
+      GetSugData();
+    }
+  }, [cookies, navigate, GetData, GetSugData]); // [] 안에 상수가 수정되면 실행되게 수정함
 
   // <_.Cover></_.Cover>로 감싸기에 <>은 필요없어 삭제함
 

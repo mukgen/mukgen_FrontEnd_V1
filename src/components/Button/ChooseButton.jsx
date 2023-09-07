@@ -1,12 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-function ChooseButton({ buttonText, okButton, onClick }) {
-  return (
-    <Button onClick={onClick} okButton={okButton}>
-      {buttonText}
-    </Button>
-  );
+function ChooseButton({ buttonText, onClick }) {
+  return <Button onClick={onClick}>{buttonText}</Button>;
 }
 
 export default ChooseButton;
@@ -19,20 +15,19 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid ${(props) => (props.okButton ? "transparent" : "#FF7A1B")};
-  background-color: ${(props) => (props.okButton ? "#FF7A1B" : "#ffe8bc")};
+  background-color: #ff7a1b;
 
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  color: ${(props) => (props.okButton ? "#fff" : "#FF7A1B")};
+  color: #fff;
   cursor: pointer;
 
   &:hover {
-    background-color: ${(props) => (props.okButton ? "#FE6B01" : "#ffdd9d")};
+    background-color: #fe6b01;
   }
   &:active {
-    background-color: ${(props) => (props.okButton ? "#EA6200" : "#FFD382")};
+    background-color: #ea6200;
   }
 `;
