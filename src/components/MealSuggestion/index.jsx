@@ -20,7 +20,7 @@ function MealSuggestion({ data }) {
   const PostCheck = () => {
     axios({
       method: "POST",
-      url: `https://stag-server.xquare.app/mukgen/meal-suggestion/check/${mealSuggestionId}`,
+      url: `https://stag-server.xquare.app/mukgen/meal-suggestion/check/${data.id}`,
       headers: {
         "X-Not-Using-Xquare-Auth": true,
       },

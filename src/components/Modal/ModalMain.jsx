@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ModalContent from "./ModalContent";
 import Close from "../../Icon/Close";
@@ -6,7 +6,6 @@ import ReviewComment from "../MealReview/ReviewComment";
 import Comment from "../Comment";
 
 function ModalMain({ title, closeModal, starRating, data, createDate }) {
-  const [isReviewOpen, setIsReviewOpen] = useState(true);
   const [comments, setComments] = useState([]);
 
   const handleBackgroundClick = (event) => {
@@ -15,40 +14,42 @@ function ModalMain({ title, closeModal, starRating, data, createDate }) {
     }
   };
 
+  useEffect(() => {
+    setComments(data.reviewCommentResponseList);
+  }, [data]);
+
   return (
     <Background onClick={handleBackgroundClick}>
-      {isReviewOpen && (
-        <Container>
-          <HeaderContainer>
-            <BlankBox />
-            <HeaderTitle>{title}</HeaderTitle>
-            <Close closeModal={closeModal} />
-          </HeaderContainer>
-          <Box>
-            <MainBox>
-              {starRating}
-              <ModalContent
-                contents={data.content}
-                nickname={data.userNickname}
-                createDate={createDate}
-              />
-            </MainBox>
-            <CommentContainer>
-              <CommentBlock>
-                {comments.map((comment, index) => (
-                  <Comment
-                    key={index}
-                    nickName={comment.nickName}
-                    uploadtime={comment.uploadtime}
-                    contents={comment.contents}
-                  />
-                ))}
-              </CommentBlock>
-            </CommentContainer>
-          </Box>
-          <ReviewComment uploadComment={setComments} />
-        </Container>
-      )}
+      <Container>
+        <HeaderContainer>
+          <BlankBox />
+          <HeaderTitle>{title}</HeaderTitle>
+          <Close closeModal={closeModal} />
+        </HeaderContainer>
+        <Box>
+          <MainBox>
+            {starRating}
+            <ModalContent
+              contents={data.content}
+              nickname={data.userNickname}
+              createDate={createDate}
+            />
+          </MainBox>
+          <CommentContainer>
+            <CommentBlock>
+              {comments.map((comment, index) => (
+                <Comment
+                  key={index}
+                  nickName={comment.nickName}
+                  uploadtime={comment.uploadtime}
+                  contents={comment.contents}
+                />
+              ))}
+            </CommentBlock>
+          </CommentContainer>
+        </Box>
+        <ReviewComment uploadComment={setComments} />
+      </Container>
     </Background>
   );
 }
