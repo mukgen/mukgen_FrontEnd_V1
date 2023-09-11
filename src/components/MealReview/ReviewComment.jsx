@@ -12,7 +12,27 @@ function ReviewComment({ uploadComment }) {
         : "#c9cad0"
       : "#c9cad0";
   };
-
+  const PostComment = () => {
+    axios({
+      method: "POST",
+      url: `https://stag-server.xquare.app/mukgen/review-comment/${reivewId}`,
+      headers: {
+        "X-Not-Using-Xquare-Auth": true,
+      },
+      data: {
+        content: commentValue,
+      },
+    })
+      .then((res) => {
+        toast.success(`댓글 등록`, {
+          icon: "",
+        });
+      })
+      .catch((err) => {
+        toast.error("네트워크를 확인해주세요!");
+        console.log(err);
+      });
+  };
   const handleCommentSubmit = () => {
     if (commentValue.trim() !== "") {
       const date = new Date();
@@ -29,7 +49,7 @@ function ReviewComment({ uploadComment }) {
       };
 
       uploadComment((prevComments) => [...prevComments, newComment]);
-
+      PostComment();
       setCommentValue("");
     }
   };

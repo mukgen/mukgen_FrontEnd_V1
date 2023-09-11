@@ -38,14 +38,20 @@ export const ListBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 14px;
+  height: calc(100vh - 168px);
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 //Review
 export const MealReviewBox = styled.div`
   display: flex;
   width: 460px;
-  height: auto;
+  height: 100%;
   flex-direction: column;
+  overflow: scroll;
 `;
 
 export const Title = styled.div`
