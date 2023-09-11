@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-function ChooseButton({ buttonText, onClick }) {
-  return <Button onClick={onClick}>{buttonText}</Button>;
+function ChooseButton({ buttonText, onClick, getCheck }) {
+  return (
+    <Button onClick={onClick} getCheck={getCheck}>
+      {buttonText}
+    </Button>
+  );
 }
 
 export default ChooseButton;
@@ -15,19 +19,20 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: #ff7a1b;
+  background-color: ${({ getCheck }) => (getCheck ? "#ff7a1b" : "#ffd382")};
+  border: ${({ getCheck }) => (getCheck ? "none" : "1px solid #FE6B01")};
 
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  color: #fff;
+  color: ${({ getCheck }) => (getCheck ? "#fff" : "#ff7a1b")};
   cursor: pointer;
 
   &:hover {
-    background-color: #fe6b01;
+    background-color: ${({ getCheck }) => (getCheck ? "#fe6b01" : "#fdcc71")};
   }
   &:active {
-    background-color: #ea6200;
+    background-color: ${({ getCheck }) => (getCheck ? "#ea6200" : "#ffc65d")};
   }
 `;

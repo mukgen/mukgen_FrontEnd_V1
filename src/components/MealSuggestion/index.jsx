@@ -9,14 +9,32 @@ import ChooseButton from "../Button/ChooseButton";
 import Check from "../../Icon/Check";
 function MealSuggestion({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [checkColor, setCheckColor] = useState("#FFD382");
+  const [checkColor, setCheckColor] = useState(false);
   const openModal = () => {
     setModalOpen(!modalOpen);
   };
   const toggleCheckColor = () => {
-    setCheckColor(checkColor === "#FF7A1B" ? "#FFD382" : "#FF7A1B");
+    setCheckColor(checkColor ? "#FFD382" : "#FF7A1B");
+    PostCheck();
   };
-
+  const PostCheck = () => {
+    axios({
+      method: "POST",
+      url: `https://stag-server.xquare.app/mukgen/meal-suggestion/check/${mealSuggestionId}`,
+      headers: {
+        "X-Not-Using-Xquare-Auth": true,
+      },
+    })
+      .then((res) => {
+        toast.success(`${checkColor ? "수락" : "취소"}되었습니다`, {
+          icon: "✅",
+        });
+      })
+      .catch((err) => {
+        toast.error("네트워크를 확인해주세요!");
+        console.log(err);
+      });
+  };
   const createData = new Date(data.createdAt);
   const year = createData.getFullYear().toString().slice(2);
   const month = (createData.getMonth() + 1).toString().padStart(2, "0");
@@ -52,7 +70,11 @@ function MealSuggestion({ data }) {
         </_.ListMain>
         {modalOpen && (
           <_.ButtonBox>
-            <ChooseButton onClick={toggleCheckColor} buttonText="수락" />
+            <ChooseButton
+              onClick={toggleCheckColor}
+              getCheck={checkColor}
+              buttonText={({ checkColor }) => (checkColor ? "수락" : "취소")}
+            />
           </_.ButtonBox>
         )}
       </_.List>

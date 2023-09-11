@@ -29,8 +29,9 @@ export const MainBox = styled.div`
 export const MealSuggestionBox = styled.div`
   display: flex;
   width: 460px;
-  height: auto;
+  height: 100%;
   flex-direction: column;
+  overflow: scroll;
 `;
 
 export const ListBox = styled.div`
@@ -44,8 +45,9 @@ export const ListBox = styled.div`
 export const MealReviewBox = styled.div`
   display: flex;
   width: 460px;
-  height: auto;
+  height: 100%;
   flex-direction: column;
+  overflow: scroll;
 `;
 
 export const Title = styled.div`
