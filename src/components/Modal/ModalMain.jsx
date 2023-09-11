@@ -48,7 +48,7 @@ function ModalMain({ title, closeModal, starRating, data, createDate }) {
             </CommentBlock>
           </CommentContainer>
         </Box>
-        <ReviewComment uploadComment={setComments} />
+        <ReviewComment data={data} uploadComment={setComments} />
       </Container>
     </Background>
   );

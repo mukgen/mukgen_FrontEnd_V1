@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Upload from "../../Icon/Upload";
-function ReviewComment({ uploadComment }) {
+import axios from "axios";
+import { toast } from "react-hot-toast";
+function ReviewComment({ uploadComment, data }) {
   const [inputFocused, setInputFocused] = useState(false);
   const [commentValue, setCommentValue] = useState("");
 
@@ -15,7 +17,7 @@ function ReviewComment({ uploadComment }) {
   const PostComment = () => {
     axios({
       method: "POST",
-      url: `https://stag-server.xquare.app/mukgen/review-comment/${reivewId}`,
+      url: `https://stag-server.xquare.app/mukgen/review-comment/${data.id}`,
       headers: {
         "X-Not-Using-Xquare-Auth": true,
       },
