@@ -34,7 +34,7 @@ function MealGraph() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [cookies]);
 
   useEffect(() => {
     if (cookies.accessToken && cookies.refreshToken) {
@@ -58,13 +58,13 @@ function MealGraph() {
               />
             </linearGradient>
           </defs>
-          {BarGraph(statisticsData, "url(#grad)")}
-          {LineGraph(statisticsData)}
-          {CircleGraph(statisticsData)}
-          {Texts(statisticsData)}
+          <BarGraph data={statisticsData} color="url(#grad)" />
+          <LineGraph data ={statisticsData} />
+          <CircleGraph data={statisticsData} />
+          <Texts data={statisticsData} />
         </svg>
       </GraphBox>
-      <MealGraphDate Data={statisticsData} />
+      <MealGraphDate data={statisticsData} />
     </>
   );
 }

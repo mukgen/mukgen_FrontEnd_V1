@@ -2,11 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 function Comment({ nickName, uploadtime, contents }) {
+  const createData = new Date(uploadtime);
+  const year = createData.getFullYear().toString().slice(2);
+  const month = (createData.getMonth() + 1).toString().padStart(2, "0");
+  const day = createData.getDate().toString().padStart(2, "0");
+  const hours = createData.getHours().toString().padStart(2, "0");
+  const minutes = createData.getMinutes().toString().padStart(2, "0");
+
+  const formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
   return (
     <CommentBox>
       <UserName>{nickName}</UserName>
       <ContentsBox>{contents}</ContentsBox>
-      <CommentTime>{uploadtime}</CommentTime>
+      <CommentTime>{formattedDate}</CommentTime>
     </CommentBox>
   );
 }
