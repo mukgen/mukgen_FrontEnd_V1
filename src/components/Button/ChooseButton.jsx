@@ -19,20 +19,20 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background-color: ${({ getCheck }) => (getCheck ? "#ff7a1b" : "#ffd382")};
-  border: ${({ getCheck }) => (getCheck ? "none" : "1px solid #FE6B01")};
+  background-color: ${({ getCheck }) => (getCheck ? "#ffd382" : "#ff7a1b")};
+  border: ${({ getCheck }) => (getCheck ? "1px solid #FE6B01" : "none")};
 
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
-  color: ${({ getCheck }) => (getCheck ? "#fff" : "#ff7a1b")};
+  color: ${({ getCheck }) => (getCheck ? "#ff7a1b" : "#fff")};
   cursor: pointer;
 
   &:hover {
-    background-color: ${({ getCheck }) => (getCheck ? "#fe6b01" : "#fdcc71")};
+    background-color: ${({ getCheck }) => (getCheck ? "#fdcc71" : "#fe6b01")};
   }
   &:active {
-    background-color: ${({ getCheck }) => (getCheck ? "#ea6200" : "#ffc65d")};
+    background-color: ${({ getCheck }) => (getCheck ? "#ffc65d" : "#ea6200")};
   }
 `;

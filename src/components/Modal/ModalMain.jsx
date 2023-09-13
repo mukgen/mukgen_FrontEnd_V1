@@ -40,9 +40,9 @@ function ModalMain({ title, closeModal, starRating, data, createDate }) {
               {comments.map((comment, index) => (
                 <Comment
                   key={index}
-                  nickName={comment.nickName}
-                  uploadtime={comment.uploadtime}
-                  contents={comment.contents}
+                  nickName={comment.reviewCommentId}
+                  uploadtime={comment.createdAt}
+                  contents={comment.content}
                 />
               ))}
             </CommentBlock>

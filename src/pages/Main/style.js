@@ -49,9 +49,8 @@ export const ListBox = styled.div`
 export const MealReviewBox = styled.div`
   display: flex;
   width: 460px;
-  height: 100%;
+  height: auto;
   flex-direction: column;
-  overflow: scroll;
 `;
 
 export const Title = styled.div`
@@ -75,13 +74,6 @@ export const SubTitle = styled.div`
   color: #ff7a1b;
   font-size: 16px;
   font-weight: 400;
-`;
-
-export const ReviewBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
 `;
 
 //Graph

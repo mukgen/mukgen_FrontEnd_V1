@@ -38,16 +38,11 @@ function ReviewComment({ uploadComment, data }) {
   const handleCommentSubmit = () => {
     if (commentValue.trim() !== "") {
       const date = new Date();
-      const year = date.getFullYear().toString().slice(2, 4);
-      const month = ("0" + (date.getMonth() + 1)).slice(-2);
-      const day = ("0" + date.getDate()).slice(-2);
-      const time = new Date().toTimeString().split(" ")[0].slice(0, 5);
-      const commentDate = `${year}.${month}.${day} ${time}`;
 
       const newComment = {
-        nickName: "영양사 선생님",
-        uploadtime: commentDate,
-        contents: commentValue,
+        reviewCommentId: "영양사 선생님",
+        createdAt: date,
+        content: commentValue,
       };
 
       uploadComment((prevComments) => [...prevComments, newComment]);

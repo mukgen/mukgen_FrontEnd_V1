@@ -14,7 +14,7 @@ function MealSuggestion({ data }) {
     setModalOpen(!modalOpen);
   };
   const toggleCheckColor = () => {
-    setCheckColor(checkColor ? "#FFD382" : "#FF7A1B");
+    setCheckColor(!checkColor);
     PostCheck();
   };
   const PostCheck = () => {
@@ -50,7 +50,7 @@ function MealSuggestion({ data }) {
         <_.ListMain>
           <_.ListInfo>
             <_.ListName>ㅇㅇ</_.ListName>
-            <Check fillColor={checkColor} />
+            <Check fillColor={checkColor ? "#FF7A1B" : "#FFD382"} />
           </_.ListInfo>
           <_.Listcontent bool={modalOpen}>{data.content}</_.Listcontent>
 
@@ -73,7 +73,7 @@ function MealSuggestion({ data }) {
             <ChooseButton
               onClick={toggleCheckColor}
               getCheck={checkColor}
-              buttonText={({ checkColor }) => (checkColor ? "수락" : "취소")}
+              buttonText={checkColor ? "취소" : "수락"}
             />
           </_.ButtonBox>
         )}
