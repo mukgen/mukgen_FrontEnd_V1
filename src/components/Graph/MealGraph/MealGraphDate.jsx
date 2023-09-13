@@ -6,10 +6,10 @@ function formatDate(date) {
   return `${month} / ${day}`;
 }
 
-function MealGraphDate({ Data = [] }) {  // 나중에는 Data를 Props로 넘겨줘야하기에 이렇게 바꿈
+function MealGraphDate({ data = [] }) {  // 나중에는 Data를 Props로 넘겨줘야하기에 이렇게 바꿈
   return (
     <DateBox>
-      {Data.map((week, index) => (
+      {data.map((week, index) => (
         <DateItem key={index} istoday={index === 6}>
           {formatDate(week.date)}
         </DateItem>
