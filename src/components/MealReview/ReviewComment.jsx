@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Upload from "../../Icon/Upload";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import { toast } from "react-hot-toast";
 function ReviewComment({ uploadComment, data }) {
   const [inputFocused, setInputFocused] = useState(false);
   const [commentValue, setCommentValue] = useState("");
+  const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
 
   const handleInputButton = () => {
     return commentValue !== ""
@@ -19,6 +21,7 @@ function ReviewComment({ uploadComment, data }) {
       method: "POST",
       url: `https://stag-server.xquare.app/mukgen/review-comment/${data.id}`,
       headers: {
+        Authorization: `Bearer ${cookies.accessToken}`,
         "X-Not-Using-Xquare-Auth": true,
       },
       data: {

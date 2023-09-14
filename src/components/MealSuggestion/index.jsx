@@ -10,6 +10,7 @@ import Check from "../../Icon/Check";
 function MealSuggestion({ data }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [checkColor, setCheckColor] = useState(false);
+  const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const openModal = () => {
     setModalOpen(!modalOpen);
   };
@@ -22,6 +23,7 @@ function MealSuggestion({ data }) {
       method: "POST",
       url: `https://stag-server.xquare.app/mukgen/meal-suggestion/check/${data.id}`,
       headers: {
+        Authorization: `Bearer ${cookies.accessToken}`,
         "X-Not-Using-Xquare-Auth": true,
       },
     })
