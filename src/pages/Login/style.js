@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Main = styled.div`
   display: flex;
-  padding: 14vh 0px 0px;
+  padding: 120px 0px 0px;
   justify-content: center;
   align-items: flex-start;
 `;
