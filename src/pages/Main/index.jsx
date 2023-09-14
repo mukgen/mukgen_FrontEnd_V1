@@ -10,7 +10,10 @@ import MealGrade from "../../components/Graph/MealGrade/index";
 import * as _ from "./style"; // style.js에서 export한 것을 모두 가져와서 _로 정의한다는 뜻이다.
 
 function Main() {
-  const [cookies, ,] = useCookies(["accessToken", "refreshToken"]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
+  const [cookies, setCookies, removeCookies] = useCookies([
+    "accessToken",
+    "refreshToken",
+  ]); // [] 안에 써있는 이름의 cookie가 수정되면 cookie가 자동 렌더링되도록 수정함
   const [reviewData, setReview] = useState([]);
   const [suggestionData, setSuggestion] = useState([]);
   const navigate = useNavigate();
@@ -35,6 +38,7 @@ function Main() {
       })
       .catch((err) => {
         toast.error("네트워크를 확인해주세요!");
+        PostAccessToken();
         // 이 오류도 마찬가지로 주석 처리
         // console.log(err);
       });
@@ -61,6 +65,30 @@ function Main() {
         // console.log(err);
       });
   }, [cookies]);
+
+  const PostAccessToken = () => {
+    axios({
+      method: "POST",
+      url: "https://stag-server.xquare.app/mukgen/auth/re-issue",
+      headers: {
+        Authorization: `Bearer ${cookies.accessToken}`,
+        "X-Not-Using-Xquare-Auth": true,
+      },
+      data: {
+        refreshToken: cookies.refreshToken,
+      },
+    })
+      .then((res) => {
+        setCookies("accessToken", res.data.accessToken);
+        setCookies("refreshToken", res.data.refreshToken);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        removeCookies("accessToken");
+        removeCookies("refreshToken");
+      });
+  };
 
   useEffect(() => {
     if (!(cookies.accessToken && cookies.refreshToken)) {

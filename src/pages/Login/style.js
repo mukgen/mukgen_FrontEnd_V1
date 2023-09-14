@@ -2,13 +2,9 @@ import styled from "styled-components";
 
 export const Main = styled.div`
   display: flex;
-  padding: 40px 0;
+  padding: 14vh 0px 0px;
   justify-content: center;
   align-items: flex-start;
-  height: calc(100vh - 340px);
-
-  @media (min-width: none) {
-  }
 `;
 
 export const LoginBox = styled.div`
