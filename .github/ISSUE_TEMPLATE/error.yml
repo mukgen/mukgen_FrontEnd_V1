@@ -1,4 +1,4 @@
-name: "에러"
+name: "에러났어요"
 description: "😥 이러이러한 에러가 났어요. 고쳐주세요"
 labels: error
 body:
