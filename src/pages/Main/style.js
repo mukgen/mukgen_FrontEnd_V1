@@ -38,7 +38,7 @@ export const ListBox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 14px;
-  height: calc(100vh - 168px);
+  height: calc(100vh - 178px);
   overflow-y: scroll;
   &::-webkit-scrollbar {
     display: none;
