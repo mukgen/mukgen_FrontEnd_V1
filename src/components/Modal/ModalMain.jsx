@@ -29,6 +29,11 @@ function ModalMain({ title, closeModal, starRating, data, createDate }) {
         <Box>
           <MainBox>
             {starRating}
+            <BackgroundImage url={data.imageUrl}>
+              <ImageBlur>
+                <ReviewImage url={data.imageUrl} />
+              </ImageBlur>
+            </BackgroundImage>
             <ModalContent
               contents={data.content}
               nickname={data.userNickname}
@@ -37,7 +42,7 @@ function ModalMain({ title, closeModal, starRating, data, createDate }) {
           </MainBox>
           <CommentContainer>
             <CommentBlock>
-              {comments.map((comment, index) => (
+              {comments?.map((comment, index) => (
                 <Comment
                   key={index}
                   nickName={comment.reviewCommentId}
@@ -145,4 +150,38 @@ const CommentBlock = styled.div`
   align-items: flex-start;
   gap: 4px;
   width: 100%;
+`;
+
+const BackgroundImage = styled.div`
+  width: 520px;
+  height: 300px;
+  box-sizing: border-box;
+  background-image: url(${(props) => props.url});
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+`;
+
+const ImageBlur = styled.div`
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+`;
+
+const ReviewImage = styled.div`
+  background-image: url(${(props) => props.url});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  z-index: 100;
+  height: 100%;
+  width: 460px;
 `;
