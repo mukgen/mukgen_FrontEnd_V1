@@ -28,7 +28,7 @@ function MealSuggestion({ data }) {
       },
     })
       .then((res) => {
-        toast.success(`${checkColor ? "수락" : "취소"}되었습니다`, {
+        toast.success(`${checkColor ? "취소" : "수락"}되었습니다`, {
           icon: "✅",
         });
       })
