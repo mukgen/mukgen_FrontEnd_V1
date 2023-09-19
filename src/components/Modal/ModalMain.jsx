@@ -14,6 +14,10 @@ function ModalMain({ title, closeModal, starRating, data, createDate }) {
     }
   };
 
+  useEffect(() => {
+    setComments(data.reviewCommentResponseList);
+  }, [data]);
+
   return (
     <Background onClick={handleBackgroundClick}>
       <Container>
