@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -45,6 +45,10 @@ function MealSuggestion({ data }) {
   const minutes = createData.getMinutes().toString().padStart(2, "0");
 
   const formattedDate = `${year}.${month}.${day} ${hours}:${minutes}`;
+
+  useEffect(() => {
+    setCheckColor(data.checked);
+  }, []);
 
   return (
     <>
